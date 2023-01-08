@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    
+</style>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Đặt Hàng</h1>
+        </div>
+        <div class="main-content">
+            <form action="" onsubmit="return kiemtra()">
+                <div class="nhom">
+                    <label for="">Số Lượng</label>
+                    <input type="text" class="invale" id="name">
+                </div>
+                
+                <div class="nhom">
+                    <label for="">Sản Phẩm</label>
+                    <input type="text" id="sp">
+                </div>
+                <div class="nhom">
+                    <label for="">Loại</label>
+                    <select onclick="tinhtien()" id="loai">
+                        <option value="1"> Loại 1</option>
+                        <option value="2">Loại 2</option>
+                        <option value="3">Loại 3</option>
+                    </select>
+                </div>
+                <div class="nhom">
+                    <label for="">Đơn Giá</label>
+                    <input type="text" id="dongia" value="" >
+                </div>
+                <div class="nhom" id="select">
+                    <label for="">Nơi Nhận Hàng</label>
+                    <input name="select"  type="radio" onchange="showFee(this)" id="nt" value="Nội Thành" >Nội Thành
+                    <input name="select"  type="radio" onchange="showFee(this)" id="nt" value="Ngoại Thành">Ngoại Thành
+                </div>
+                <div class="nhom" id="feeInfo" style="display: none;">
+                    <label for="" id="pvc" class="pvc">Phí Vận Chuyển</label>
+                    <input type="number" id="fee" value="100000">
+                </div>
+                <div class="dk">
+                    <input type="submit" value="đăng kí" onclick="">
+                </div>
+                <div class="hienthi" ></div>
+                
+            </form>
+        </div>
+    </div>
+
+    <script>
+        var sl = document.getElementById("name"); 
+        var sp = document.getElementById("sp");
+        var dg = document.getElementById("dongia");
+        var loai = document.getElementById("loai");
+        var pvc = document.getElementById("fee");
+        var nt = document.getElementById("nt");
+
+    function kiemtra(){
+         event.preventDefault(); 
+        if(
+            sl.value == "" ||
+            sp.value == "" ||
+            dg.value == "" ||
+            checkradio() == false
+        ){
+            alert('nhập Đầy đủ');
+            
+            return false;
+        }
+        if(sl.value < 0){
+            alert('số lượng lớn hơn 0');
+        }
+        if(isNaN(sl.value)){
+            alert('số lượng phải là số');
+            return false;
+        }
+
+        if(dg.value < 0){
+            alert('đơn giá lớn không âm');
+            return false;
+        }
+        else{
+            alert('thành công');
+
+           
+        }
+        var ht = document.querySelector(".hienthi");
+        // document.write('<p>Sản Phẩm:' + sp.value + '<p/>');
+        // document.write('<p>Loại:' + loai.value + '<p/>');
+        // document.write('<p>Đơn Giá:' + dg.value + '<p/>');
+        // document.write('<p>Nơi Nhận Hàng:' + nt.value + '<p/>');
+        // document.write('<p>Phí Vận Chuyển:' + pvc.value + '<p/>');
+            ht.innerHTML = `
+            <p> Sản Phẩm: ${sp.value} </p>
+            <p> Loại: ${loai.value} </p>
+            <p> Đơn Giá: ${dg.value} </p>
+            <p> Nơi Nhận Hàng: ${nt.value} </p>
+            <p> Phí Vận Chuyển: ${pvc.value} </p>
+            `
+        
+
+    }
+    function checkradio(){
+
+        var select = document.getElementsByName('select');
+        var check = false;
+        for(var i = 0; i < select.length; i++){
+            if(select[i].checked==true){
+                check = true;
+               
+                
+            }
+            
+        }
+        return check;
+    }  
+
+    function showFee(rdb){
+        const feeInfo = document.getElementById("feeInfo");
+        if(rdb.checked && rdb.value == "Ngoại Thành"){
+            feeInfo.style.display = "block"
+        }else{
+            feeInfo.style.display = "none"
+            
+        }
+        
+    }
+    
+
+     
+
+    
+    </script>
+</body>
+</html>
